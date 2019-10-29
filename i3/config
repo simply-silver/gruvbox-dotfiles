@@ -1,0 +1,181 @@
+# Set mod key
+set $mod Mod4
+
+# Set window title font
+font pango:Fira Code 9
+
+# Align window title
+title_align center
+
+# Window rules
+for_window [class="^.*"] border pixel 0
+for_window [title="Library"] floating enable
+
+# Define gaps between windows
+gaps inner 10
+gaps outer 8
+
+# Rounded corners
+border_radius 5
+
+# Drag floating windows (Mouse + $mod)
+floating_modifier $mod
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Exit i3
+bindsym $mod+Shift+e exit
+
+# Lock desktop with keybind
+bindsym $mod+x exec i3lock -i /home/argent/Pictures/pacman.png -p win
+
+# Open applications
+bindsym $mod+t exec kitty #xfce4-terminal
+bindsym $mod+d exec rofi -show run -theme gruvbox_custom -font "Iosevka 9"
+bindsym $mod+F2 exec firefox
+bindsym $mod+F8 exec gnome-screenshot -i
+bindsym $mod+F6 exec thunar
+bindsym $mod+F7 exec discord
+
+# Change window focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Split window in horizontal
+bindsym $mod+h split h
+
+# Split window in vertical
+bindsym $mod+v split v
+
+# Enter fullscreen mode for the focused window
+bindsym $mod+f fullscreen toggle
+
+# Change window layout (Stacked, tabbed or toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle between tiling and floating
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling and floating windows
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container
+bindsym $mod+a focus parent
+
+# Focus the child container
+#bindsym $mod+d focus child
+
+# Set names for workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspaces
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 session inplace
+bindsym $mod+Shift+r restart
+
+# Resize window
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+
+        bindsym Left        resize shrink width 5 px or 5 ppt
+        bindsym Down        resize grow height 5 px or 5 ppt
+        bindsym Up          resize shrink height 5 px or 5 ppt
+        bindsym Right       resize grow width 5 px or 5 ppt
+
+       # Resize more rapidy with shift
+        bindsym Shift+Left        resize shrink width 50 px or 50 ppt
+        bindsym Shift+Down        resize grow height 50 px or 50 ppt
+        bindsym Shift+Up          resize shrink height 50 px or 50 ppt
+        bindsym Shift+Right       resize grow width 50 px or 50 ppt
+
+        # Resize more finely with Ctrl
+        bindsym Ctrl+Left        resize shrink width 1 px or 1 ppt
+        bindsym Ctrl+Down        resize grow height 1 px or 1 ppt
+        bindsym Ctrl+Up          resize shrink height 1 px or 1 ppt
+        bindsym Ctrl+Right       resize grow width 1 px or 1 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+
+# Enter resize mode
+bindsym $mod+r mode "resize"
+
+# Remove borders for i3-gaps
+for_window [class=".*"] border pixel 0
+hide_edge_borders both
+
+# Launch XFCE Power Manager (for screen/keyboard backlight controls)
+exec --no-startup-id xfce4-power-manager
+
+# Launch NetworkManager applet
+exec --no-startup-id nm-applet
+
+# Customize colors
+client.focused          #b8bb26 #b8bb26 #ebdbb2 #b8bb26 #b8bb26
+client.focused_inactive #282828 #282828 #ebdbb2 #282828 #282828
+client.unfocused        #282828 #282828 #ebdbb2 #282828 #282828
+client.urgent           #282828 #282828 #fb4934 #282828 #282828
+client.placeholder      #282828 #282828 #ebdbb2 #282828 #282828
+
+# Polybar
+exec_always --no-startup-id /home/argent/.config/polybar/launch.sh
+
+# Wallpaper
+exec_always --no-startup-id feh --bg-fill /home/argent/Pictures/pacmandark.png
+
+# Compton
+exec_always --no-startup-id /home/argent/.config/compton/launch.sh
